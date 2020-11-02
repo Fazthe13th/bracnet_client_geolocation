@@ -1,4 +1,4 @@
-import mysql.connector
+
 import mariadb
 import os
 from dotenv import load_dotenv
@@ -26,12 +26,12 @@ class DatabaseQureies:
 
     def connect_voip_report_db(self):
         try:
-            voip_report_db = mysql.connector.connect(
-                host=os.getenv('report_host'),
+            voip_report_db = mariadb.connect(
                 user=os.getenv('report_user'),
-                passwd=os.getenv('report_passwd'),
-                database=os.getenv('report_database'),
-                auth_plugin='mysql_native_password'
+                password=os.getenv('report_passwd'),
+                host=os.getenv('report_host'),
+                port=int(os.getenv('report_port')),
+                database=os.getenv('report_database')
             )
 
             print('VOIP Report Database connected')
